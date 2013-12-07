@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     :class_name => "Response"
   )
 
-  has_many :questions, :through => :authored_polls, :source => :questions
+  def completed_polls
+    Polls.select("polls.*, COUNT(response.user_id) tally")
+    .joins(:question => :response).where('response.id = ?', self.id)
+  end
+
 
 end

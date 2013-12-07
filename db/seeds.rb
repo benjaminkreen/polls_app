@@ -19,6 +19,10 @@ ActiveRecord::Base.transaction do
   u3.user_name = "John Smith"
   u3.save!
 
+  u4 = User.new
+  u4.user_name = "Cindy Lou"
+  u4.save!
+
   p1 = Poll.new
   p1.title = "Animal Survey!"
   p1.author_id = u1.id
@@ -47,6 +51,7 @@ ActiveRecord::Base.transaction do
   q12 = Question.new
   q12.text = "How many dogs?"
   q12.poll_id = p1.id
+  q12.save!
 
   ac121 = AnswerChoice.new
   ac121.choice = "Zero"
@@ -64,9 +69,19 @@ ActiveRecord::Base.transaction do
   ac123.save!
 
   r1 = Response.new
-  r1.user_id = u1.id
+  r1.user_id = u2.id
   r1.answer_choice_id = ac112.id
   r1.save!
+
+  r2 = Response.new
+  r2.user_id = u3.id
+  r2.answer_choice_id = ac113.id
+  r2.save!
+
+  r3 = Response.new
+  r3.user_id = u4.id
+  r3.answer_choice_id = ac113.id
+  r3.save!
 end
 
 
